@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @RestResource(rel = "authors", path = "authors")
-public interface AuthorRepository extends JpaRepository<Author, Integer> {
+public interface AuthorRepository extends PagingAndSortingRepository<Author, Integer> {
 
 }

@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @RestResource(rel = "books", path = "books")
-public interface BookRepository extends JpaRepository<Book, Integer> {
+public interface BookRepository extends PagingAndSortingRepository<Book, Integer> {
 
 }

@@ -1,4 +1,4 @@
 .idea
-profiles
+profiles/**/*.properties
 spring_data_rest.iml
 target
