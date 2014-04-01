@@ -12,6 +12,11 @@
     <profiles>
         <profile>
             <id>dev</id>
+            <properties>
+                <server.url>http://localhost:8080/manager</server.url>
+                <server.id>localhost</server.id>
+                <server.app.path>/template</server.app.path>
+            </properties>
             <build>
                 <filters>
                     <filter>profiles/dev/config.properties</filter>

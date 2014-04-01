@@ -14,7 +14,7 @@ import java.util.List;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -22,6 +22,9 @@ public class Author {
     @JsonIgnore
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
+
+    @OneToOne(mappedBy = "husband")
+    private Wife wife;
 
 
     public Integer getId() {
@@ -46,5 +49,13 @@ public class Author {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public Wife getWife() {
+        return wife;
+    }
+
+    public void setWife(Wife wife) {
+        this.wife = wife;
     }
 }
