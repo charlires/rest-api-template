@@ -79,7 +79,6 @@
                 <version>7.5.Final</version>
                 <configuration>
                     <hostname>${server.url}</hostname>
-                    <!--<port>9999</port>-->
                     <username>${server.username}</username>
                     <password>${server.password}</password>
                 </configuration>
@@ -177,6 +176,30 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Spring Security -->
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <!-- Spring Data REST -->
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -193,12 +216,6 @@
             <artifactId>spring-data-rest-core</artifactId>
             <version>${spring.data.rest.version}</version>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.data</groupId>-->
-            <!--<artifactId>spring-data-jpa</artifactId>-->
-            <!--<version>${spring.data.jpa.version}</version>-->
-        <!--</dependency>-->
 
         <!-- Spring Data JPA -->
 

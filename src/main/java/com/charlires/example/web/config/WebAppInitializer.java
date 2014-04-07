@@ -5,9 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
+import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -28,22 +31,21 @@ public class WebAppInitializer implements WebApplicationInitializer {
         // Enable Spring Data REST in the DispatcherServlet
         AnnotationConfigWebApplicationContext webCtx = new AnnotationConfigWebApplicationContext();
         webCtx.register(RepositoryRestMvcConfiguration.class);
-//        webCtx.setConfigLocation("com.charlires.example.config");
-//        servletContext.addListener(new ContextLoaderListener(webCtx));
+
+        // Enable Spring Security in the ServletContext
+        servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
+                .addMappingForUrlPatterns(null, false, "/*");
+
+        FilterRegistration.Dynamic enc = servletContext.addFilter("encodingFilter",
+                new CharacterEncodingFilter());
+        enc.setInitParameter("encoding", "UTF-8");
+        enc.setInitParameter("forceEncoding", "true");
+        enc.addMappingForUrlPatterns(null, true, "/*");
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(webCtx);
         ServletRegistration.Dynamic reg = servletContext.addServlet("rest-exporter", dispatcherServlet);
         reg.setLoadOnStartup(1);
         reg.addMapping("/api/*");
     }
-
-
-//    private AnnotationConfigWebApplicationContext getContext() {
-//        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-//        context.setConfigLocation("com.charlires.example.config");
-//        return context;
-//    }
-
-
 
 }
