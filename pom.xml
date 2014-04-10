@@ -56,6 +56,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
@@ -64,24 +67,14 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <version>1.1</version>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.0.1.Final</version>
                 <!--<configuration>-->
-                    <!--<url>${server.url}</url>-->
-                    <!--<server>${server.id}</server>-->
-                    <!--<path>${server.app.path}</path>-->
+                    <!--<hostname>${server.url}</hostname>-->
+                    <!--<username>${server.username}</username>-->
+                    <!--<password>${server.password}</password>-->
                 <!--</configuration>-->
-            </plugin>
-            <plugin>
-                <groupId>org.jboss.as.plugins</groupId>
-                <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>7.5.Final</version>
-                <configuration>
-                    <hostname>${server.url}</hostname>
-                    <username>${server.username}</username>
-                    <password>${server.password}</password>
-                </configuration>
             </plugin>
         </plugins>
 
@@ -89,30 +82,30 @@
 
     <properties>
 
-        <spring.version>3.2.2.RELEASE</spring.version>
+        <spring.version>4.0.3.RELEASE</spring.version>
 
-        <spring.data.jpa.version>1.1.0.M1</spring.data.jpa.version>
-        <spring.data.rest.version>1.1.0.M1</spring.data.rest.version>
+        <spring.data.jpa.version>1.5.1.RELEASE</spring.data.jpa.version>
+        <spring.data.rest.version>2.0.1.RELEASE</spring.data.rest.version>
+        <spring.data.repo.version>1.0.0.RELEASE</spring.data.repo.version>
+        <spring.hateoas.version>0.9.0.RELEASE</spring.hateoas.version>
 
         <bonecp.version>0.7.1.RELEASE</bonecp.version>
-        <h2.version>1.3.172</h2.version>
         <hibernate.version>4.1.9.Final</hibernate.version>
 
-        <jackson.version>2.2.1</jackson.version>
-        <jsonpath.version>0.8.1</jsonpath.version>
+        <jackson.version>2.3.1</jackson.version>
         <slf4j.version>1.6.4</slf4j.version>
 
-        <jdk.version>1.6</jdk.version>
+        <jdk.version>1.7</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     </properties>
 
-    <repositories>
-        <repository>
-            <id>spring-libs-snapshot</id>
-            <url>http://repo.spring.io/libs-snapshot</url>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>spring-libs-snapshot</id>-->
+            <!--<url>http://repo.spring.io/libs-snapshot</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
 
     <pluginRepositories>
         <pluginRepository>
@@ -122,6 +115,8 @@
     </pluginRepositories>
 
     <dependencies>
+
+        <!-- Testing -->
 
         <dependency>
             <groupId>junit</groupId>
@@ -178,29 +173,10 @@
 
         <!-- Spring Security -->
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+        <!-- Missing -->
 
         <!-- Spring Data REST -->
+
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-webmvc</artifactId>
@@ -208,13 +184,18 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-rest-repository</artifactId>
+            <artifactId>spring-data-rest-core</artifactId>
             <version>${spring.data.rest.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-rest-core</artifactId>
-            <version>${spring.data.rest.version}</version>
+            <artifactId>spring-data-rest-repository</artifactId>
+            <version>${spring.data.repo.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+            <version>${spring.hateoas.version}</version>
         </dependency>
 
         <!-- Spring Data JPA -->
@@ -222,19 +203,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.3.1.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.hateoas</groupId>
-            <artifactId>spring-hateoas</artifactId>
-            <version>0.6.0.BUILD-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.plugin</groupId>
-            <artifactId>spring-plugin-core</artifactId>
-            <version>0.8.0.RELEASE</version>
+            <version>${spring.data.jpa.version}</version>
         </dependency>
 
         <dependency>

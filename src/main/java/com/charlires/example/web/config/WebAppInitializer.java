@@ -30,11 +30,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         // Enable Spring Data REST in the DispatcherServlet
         AnnotationConfigWebApplicationContext webCtx = new AnnotationConfigWebApplicationContext();
-        webCtx.register(RepositoryRestMvcConfiguration.class);
+        webCtx.register(RestConfig.class); // Child class of RepositoryRestMvcConfiguration
 
         // Enable Spring Security in the ServletContext
-        servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
-                .addMappingForUrlPatterns(null, false, "/*");
+//        servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
+//                .addMappingForUrlPatterns(null, false, "/*");
 
         FilterRegistration.Dynamic enc = servletContext.addFilter("encodingFilter",
                 new CharacterEncodingFilter());

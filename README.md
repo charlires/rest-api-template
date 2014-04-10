@@ -3,8 +3,13 @@ Rest API's Template
 
 Using
 -----
-spring data rest
-spring data jpa
+- java 7
+- spring data rest 2.0.1
+- spring data jpa
+
+How to run
+----------
+mvn install wildfly:run
 
 
 postman_collection.json
